@@ -64,9 +64,9 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.prabhatrai33"
                 artifactId = "swipeOk"
-                version = "1.0.3"
+                version = "1.0.4"
 
-                artifact(sourcesJar.get())
+               // artifact(sourcesJar.get())
                 artifact(javadocJar.get())
 
                 // ✅ Fix: Declare task dependencies to avoid Gradle 8 errors
