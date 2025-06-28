@@ -64,7 +64,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.prabhatrai33"
                 artifactId = "swipeOk"
-                version = "1.0.4"
+                version = "1.0.5"
 
                // artifact(sourcesJar.get())
                 artifact(javadocJar.get())
