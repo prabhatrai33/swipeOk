@@ -64,11 +64,18 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.prabhatrai33"
                 artifactId = "swipeOk"
-                version = "1.0.2"
+                version = "1.0.3"
 
                 artifact(sourcesJar.get())
                 artifact(javadocJar.get())
+
+                // ✅ Fix: Declare task dependencies to avoid Gradle 8 errors
+                tasks.named("generateMetadataFileForReleasePublication") {
+                    dependsOn(sourcesJar)
+                    dependsOn(javadocJar)
+                }
             }
         }
     }
 }
+
