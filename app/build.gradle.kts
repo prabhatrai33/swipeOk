@@ -1,21 +1,17 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
     id("maven-publish")
 }
 
 android {
     namespace = "com.vibrantit.swipeok"
-    compileSdk = 36
+    compileSdk = 36 // Use 34 for stability; 36 is in preview
 
     defaultConfig {
         minSdk = 28
-        targetSdk = 36
-
-        versionCode = 1
-        versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -51,6 +47,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 }
 
+// Optional Javadoc/Sources JARs
 val sourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
     from(android.sourceSets["main"].java.srcDirs)
@@ -64,11 +61,11 @@ afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("release") {
+                from(components["release"])
                 groupId = "com.github.prabhatrai33"
                 artifactId = "swipeOk"
-                version = "1.0"
+                version = "1.0.2"
 
-                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
                 artifact(sourcesJar.get())
                 artifact(javadocJar.get())
             }
